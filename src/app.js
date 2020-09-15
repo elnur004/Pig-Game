@@ -31,25 +31,48 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         roundScore += dice;
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
     } else {
-        //Next player
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-        roundScore = 0;
-        
-        // Set the score to '0'
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-1').textContent = '0';
-
-        // Toggling of the active player's pointer
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
-
-        // Hide the dice again
-        document.querySelector('.dice').style.display = 'none';
+        // Next player
+        nextPlayer();
     }
 })
 
 
+document.querySelector('.btn-hold').addEventListener('click', function() {
+    // Add current score to GLOBAL score
+    scores[activePlayer] += roundScore;
 
+    // Update the UI
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+    // Check if player won the game
+    if(scores[activePlayer] >= 20) {
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.dice').style.display = 'none';
+    } else {
+         // Next player
+         nextPlayer();
+    }
+})
+
+
+// Function for the next player (created for the Don't Repeat Yourself principle)
+function nextPlayer() {
+    //Next player
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundScore = 0;
+    
+    // Set the score to '0'
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+    // Toggling of the active player's pointer
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    // Hide the dice again
+    document.querySelector('.dice').style.display = 'none';
+}
 
 
 
