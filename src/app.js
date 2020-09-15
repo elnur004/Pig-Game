@@ -26,8 +26,26 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDom.src = 'img/dice-' + dice + '.png';  // dynamically changing the dice image referring to the dice number
     
     // 3. Update theround score IF the rolled number was NOT a 1
-    
+    if(dice !== 1) {
+        // Add score
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    } else {
+        //Next player
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        roundScore = 0;
+        
+        // Set the score to '0'
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
 
+        // Toggling of the active player's pointer
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+
+        // Hide the dice again
+        document.querySelector('.dice').style.display = 'none';
+    }
 })
 
 
@@ -36,5 +54,3 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
 
-// Add the dice number to the current player's round score;
-//document.querySelector('#current-' + activePlayer).textContent = dice;
