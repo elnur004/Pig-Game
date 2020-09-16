@@ -152,7 +152,7 @@ i {
     text-align: center;
     padding: 10px;
     text-transform: uppercase;
-    width: 160px;
+    width: 180px;
 }
 
 #input:focus { outline: none; }
